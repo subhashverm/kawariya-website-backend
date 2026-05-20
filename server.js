@@ -1,7 +1,11 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
 const adminRoutes = require("./routes/admin");
+
 const app = express();
 
 app.use(cors());
@@ -17,12 +21,11 @@ app.get("/", (req, res) => {
 
 app.use("/api/admin", adminRoutes);
 
-
 app.use("/api/pilgrims", require("./routes/pilgrimRoutes"));
 app.use("/api/darshan", require("./routes/darshanRoutes"));
 app.use("/api/facilities", require("./routes/facilityRoutes"));
-const newLocal = "./routes/SOSRoutes";
-app.use("/api/sos", require(newLocal));
+app.use("/api/sos", require("./routes/SOSRoutes"));
+
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
